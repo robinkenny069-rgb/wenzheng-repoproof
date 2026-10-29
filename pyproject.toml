@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "repoproof-aic-prototype"
+version = "0.1.0"
+description = "Evidence-first documentation change review prototype"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+repoproof = "repoproof.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

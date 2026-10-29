@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>文证 · 真实源码中文带读</title>
+<style>
+*{box-sizing:border-box}body{margin:0;color:#17313d;background:#f3f6f7;font-family:"Microsoft YaHei",system-ui,sans-serif}main{max-width:980px;margin:auto;padding:36px 24px 64px}h1{font-size:30px}h2{font-size:21px;overflow-wrap:anywhere}h3{font-size:15px;margin-bottom:8px}p{line-height:1.8}.eyebrow{color:#256e63;font-weight:700;font-size:13px}.meta{font-size:13px;color:#556773;overflow-wrap:anywhere}.intro{padding:18px 22px;background:#e6f0ec;border-left:4px solid #509587}.controls{display:grid;grid-template-columns:1fr 2fr;gap:20px;margin:22px 0}article{margin:22px 0;padding:24px;background:white;border:1px solid #d6e1e4;border-radius:10px}pre{background:#f0f4f5;padding:14px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.65;font-family:Consolas,monospace;font-size:14px}label{display:block;line-height:1.7;margin-top:16px}input,select,textarea{display:block;width:100%;font:inherit;padding:10px;margin-top:6px;border:1px solid #acbdc3;border-radius:5px;background:white;color:#17313d}textarea{resize:vertical}a,summary{color:#216d60}summary{cursor:pointer}button{font:inherit;padding:12px 22px;border:0;border-radius:6px;background:#215f58;color:white;cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #d09c27;outline-offset:3px}#status{min-height:30px;color:#70471b}footer{margin-top:28px;border-top:1px solid #d5e0e3;padding-top:16px}.small{font-size:13px;color:#556773}@media(max-width:600px){main{padding:24px 14px}h1{font-size:25px}article{padding:17px}.controls{grid-template-columns:1fr;gap:0}input,select,textarea{font-size:16px}pre{font-size:13px}}
+</style><style>.reading{background:#edf5f0;border-left:3px solid #539482;padding:12px 18px;margin:18px 0}.reading h3{margin-top:0}.reading p{margin-bottom:6px}.intro code{overflow-wrap:anywhere}</style></head><body><main>
+<p class="eyebrow">文证 / 中文带读练习</p><h1>先看懂一条，再继续</h1>
+<div class="intro"><p><strong>现在先不用交6条答案。</strong>先看下面的入门解释和R01中文带读；其他条目可以之后再看。</p><p><strong>函数</strong>可以理解成一个小工具。<strong>函数声明</strong>是工具开头的一行代码，列出它叫什么、能接收哪些设置，以及哪些设置有默认值。<strong>参数说明</strong>是给使用者看的文字说明。</p><p>例如，教学代码 <code>def send_message(text, retries=3):</code> 表示：定义一个发送消息的工具，接收消息内容text；retries是重试次数，使用者没有填写时，声明的默认值是3。工具具体如何工作，要看后面的代码。</p><p>先只比较“代码声明的默认设置”和“文字说明写的默认设置”。不要求读懂整个算法，也不据此断言完整运行行为。本页含助手讲解及R01答案，保存的记录会注明带读学习。</p></div>
+<p class="small">阅读提示：default表示“默认值”；True / False表示真 / 假；None是特殊空值；等号右侧写的是声明的默认值。括号中的其他数字可能是举例或取值范围，请看清参数名称。</p>
+<div class="controls"><label>成员代号（需要保存练习时选择）<select id="participant"><option value="">请选择A或B</option><option value="A">成员A</option><option value="B">成员B</option></select></label><label>除本页讲解外，是否看过队友答案或上游修复结论？<select id="exposure"><option value="">请如实选择</option><option value="no">没有</option><option value="yes">看过或讨论过</option><option value="unsure">不确定</option></select></label></div>
+<p class="small">更换成员会清空当前表单，请先导出。刷新页面也会清空未导出的内容。查看完整源码的点击会随记录保存，不会自动把本轮称为盲标。</p>
+<!-- CARDS -->
+<button id="export" type="button">完成后保存带读练习（现在不必提交）</button><p id="status" role="status" aria-live="polite"></p>
+<footer class="small">本轮由两个真实历史修复事件的版本片段及正常字段构成，6条记录不是6个独立缺陷。原文按固定提交截取，仅附行号，不改写英文。来源、许可证和文件哈希已保留。选择和导出均在本机完成；本页不上传、不调用模型。</footer>
+<script>
+const metadata=/* PACKET_METADATA */;
+const opened=new Set();
+const openedAt=new Date().toISOString();
+let firstAnswerAt=null;
+let previousParticipant='';
+const cards=Array.from(document.querySelectorAll('article'));
+document.querySelectorAll('.source').forEach(link=>link.addEventListener('click',()=>opened.add(link.dataset.item)));
+document.querySelectorAll('article select, article input, article textarea').forEach(el=>el.addEventListener('input',()=>{if(!firstAnswerAt)firstAnswerAt=new Date().toISOString();}));
+document.getElementById('participant').addEventListener('change',e=>{
+  if(previousParticipant && previousParticipant!==e.target.value){
+    document.querySelectorAll('article select, article input, article textarea').forEach(el=>el.value='');
+    document.getElementById('exposure').value='';
+    firstAnswerAt=null;
+    document.getElementById('status').textContent='已清空作答。请新成员独立填写；若看过队友内容，请如实选择。';
+  }
+  previousParticipant=e.target.value;
+});
+document.getElementById('export').addEventListener('click',()=>{
+  const participant=document.getElementById('participant').value;
+  const priorExposure=document.getElementById('exposure').value;
+  const status=document.getElementById('status');
+  const judgments=cards.map(card=>({item_id:card.dataset.item,decision:card.querySelector('.decision').value,evidence:card.querySelector('.evidence').value.trim(),reason:card.querySelector('.reason').value.trim()}));
+  if(!participant||!priorExposure||judgments.some(row=>!row.decision||!row.evidence||row.reason.length<4)){
+    status.textContent='请先选择成员和接触情况，并为每条填写判断、依据位置及至少4字的理由。';return;
+  }
+  const record={...metadata,record_kind:'guided_source_reading_self_report',participant,prior_exposure:priorExposure,
+    page_opened_at:openedAt,first_answer_at:firstAnswerAt,exported_at:new Date().toISOString(),
+    source_links_opened:Array.from(opened),model_predictions_shown:false,reference_answers_shown:true,explained_item_ids:['R01'],judgments,
+    scope:'AI-assisted guided learning with the first answer explained; not independent annotation or evaluation gold labels.'};
+  const url=URL.createObjectURL(new Blob([JSON.stringify(record,null,2)],{type:'application/json;charset=utf-8'}));
+  const a=document.createElement('a');a.href=url;a.download='文证真实来源带读_v2_成员'+participant+'.json';a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  status.textContent='已发起下载。文件已注明带读学习，不当作独立标注。确认保存后可放入practice/feedback文件夹，不要覆盖其他练习。';
+});
+</script></main></body></html>

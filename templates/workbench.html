@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>文证 · 核验工作台</title>
+<style>
+:root{font-family:"Segoe UI","Microsoft YaHei",sans-serif;color:#243b40;background:#f3f6f5;font-size:15px;line-height:1.65;--green:#17675c;--muted:#586d71;--border:#d7e2df}*{box-sizing:border-box}body{margin:0}header{background:#123c38;color:#f2faf6}header>div,main{max-width:1230px;margin:auto;padding:28px 30px}header>div{padding-top:32px;padding-bottom:30px}.eyebrow{font-size:12px;letter-spacing:3px;color:#b8d8ca}h1{font-size:34px;line-height:1.25;margin:12px 0}h2{font-size:22px;margin:0 0 12px}h3{font-size:17px;margin:0 0 9px;overflow-wrap:anywhere}p{margin:8px 0}header p{color:#d3e5dd;max-width:800px}nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}nav a{color:white;text-decoration:none;border:1px solid #5c8075;border-radius:20px;padding:5px 15px;font-size:13px}a{color:var(--green)}section{scroll-margin-top:18px;margin-bottom:26px}.notice{border-left:3px solid #cfa14c;background:#fff5df;padding:12px 17px;margin-bottom:22px}.meta{color:var(--muted);font-size:13px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}.stat,.panel{background:white;border:1px solid var(--border);border-radius:10px;padding:20px}.stat strong{font-size:32px;display:block;line-height:1.25;letter-spacing:-1px}.stat span{display:block;margin-top:8px;color:var(--muted);font-size:13px}.stats .accent strong{color:#a5492c}.project-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:15px}.project-row{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin:14px 0}.project-row strong{font-size:25px;color:var(--green)}.filters{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:17px 0}label{display:block;font-size:13px;font-weight:600;color:#405b5c}input,select,textarea,button{font:inherit}select,input[type=search],textarea{width:100%;border:1px solid #adc1ba;background:white;border-radius:6px;padding:9px 11px;color:#243b40}select{min-height:43px}textarea{min-height:82px;resize:vertical}.filters label{flex:1;min-width:170px}.filters label.search{flex:2}button,.file-button{border:1px solid #a8c0b7;background:white;border-radius:6px;padding:9px 16px;cursor:pointer;color:#244f45;font-weight:600;display:inline-block;font-size:14px}button:hover,.file-button:hover{background:#edf5ef}button.primary{background:var(--green);color:white;border-color:var(--green)}button:disabled{opacity:.45;cursor:default}.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}#export-message{min-height:22px}#review-count{font-weight:700;color:var(--green)}article{background:white;border:1px solid var(--border);border-radius:10px;padding:23px;margin:14px 0}.card-top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}.tag{display:inline-block;font-size:12px;border-radius:4px;padding:3px 8px;margin-bottom:8px;background:#edf1ef;color:#46635a}.tag.candidate{background:#fff0df;color:#89431c}.tag.consistent{background:#e4f3ed;color:#1b6245}.tag.uncertain{background:#edf1f6;color:#506178}.evidence{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:12px;min-width:0}.evidence>div{min-width:0}pre{font-family:Consolas,monospace;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f6f5;border:1px solid #e5ece8;border-radius:5px;padding:12px;margin:7px 0;font-size:13px;max-height:300px;overflow-y:auto}.human{border-top:1px solid #e0e8e3;padding-top:15px;margin-top:17px;display:grid;grid-template-columns:240px 1fr;gap:15px}summary{cursor:pointer;color:var(--green);font-size:14px;overflow-wrap:anywhere}details{margin-top:10px}details li{margin:8px 0}code{overflow-wrap:anywhere}.wrap{overflow-wrap:anywhere}table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid #e1e8e4}th{color:var(--muted);font-weight:500}.table-wrap{overflow-x:auto}.metrics-note{margin-top:15px;padding:13px;background:#f2f6f3}.pager{display:flex;align-items:center;justify-content:center;gap:14px;margin:18px 0}footer{border-top:1px solid var(--border);padding-top:16px;color:var(--muted);font-size:12px;overflow-wrap:anywhere}.error{color:#a43c23}.success{color:#17634a}[hidden]{display:none!important}:focus-visible{outline:3px solid #c08a2c;outline-offset:3px}@media(max-width:700px){header>div,main{padding:22px 15px}h1{font-size:28px}.stats{grid-template-columns:1fr 1fr}.stat{padding:15px}.project-grid,.evidence,.human{grid-template-columns:1fr}article{padding:16px}.card-top{display:block}.panel{padding:16px}.filters label{min-width:140px}th,td{font-size:12px;padding:8px 5px}}
+</style></head><body>
+<header><div><div class="eyebrow">REPOPROOF / DEVELOPMENT WORKBENCH</div><h1>文证 · 开源文档核验工作台</h1><p>找到相关说明，核对代码来源，再留下你的判断与依据。</p><nav><a href="#overview">运行概览</a><a href="#review">证据与复核</a><a href="#retrieval">AI定位对照</a><a href="../configuration-review/index.html">配置来源核验 · 新增</a><a href="#export">导出记录</a></nav></div></header>
+<main><div class="notice">当前展示两个已知历史修复的开发验证。机器候选需要复核，暂不能确定不等于文档错误；没有候选也不代表整份文档正确。</div>
+<section class="panel"><h2>新增：追踪配置对象和选项回退</h2><p>HTTPX 与 Celery/Kombu 两个案例已单独记录来源链、适用条件和完整文档检索对照，未混入本页138条参数统计。</p><a href="../configuration-review/index.html">打开配置来源核验报告 →</a><p class="meta">已有复核JSON继续绑定导出时的历史证据版本，请保留旧文件；无需为本次界面升级重复填写。</p></section>
+<section id="overview"><h2>本次运行</h2><p class="meta" id="run-note"></p><div class="stats" id="stats"></div><div class="project-grid" id="projects"></div></section>
+<section id="review"><h2>查看证据，留下你的结论</h2><p>先选一条候选核对即可。下面的人工判断针对<strong>修复前</strong>的说明；修复后内容用于对照。不会自动替你填写，也不需要一次完成所有记录。</p>
+<div class="filters"><label>机器分析状态<select id="status-filter"><option value="candidate">不一致候选</option><option value="consistent">声明值一致</option><option value="uncertain">暂不能确定</option><option value="all">全部记录</option></select></label><label>来源项目<select id="case-filter"><option value="all">全部项目</option></select></label><label class="search">搜索函数或参数<input id="search" type="search" placeholder="例如 show_clicks、timeout"></label></div>
+<p class="meta" id="filter-count"></p><div id="cards"></div><div class="pager"><button id="prev" type="button">上一页</button><span id="page-position"></span><button id="next" type="button">下一页</button></div></section>
+<section id="retrieval" class="panel"><h2>AI定位到了，不等于已经判错</h2><p>代码分析负责核对受支持的声明事实，AI负责给相关说明排序。这两个步骤分别记录。</p><div id="retrieval-content"></div></section>
+<section id="export" class="panel"><h2>保存本次人工复核</h2><p>记录人：当前操作者。已给出有理由的判断：<span id="review-count">0</span> 条。未处理的条目保留“未复核”。</p><p class="meta">这是看过机器结果的辅助复核，不是盲标或独立准确率评测。导出文件只下载到本机，不会发送或修改项目源码。</p><div class="toolbar"><button type="button" class="primary" id="download">导出我的复核记录</button><label class="file-button" for="import-record">从JSON恢复记录</label><input id="import-record" type="file" accept=".json,application/json" hidden></div><p id="export-message" role="status" aria-live="polite"></p><p class="meta" id="storage-message"></p></section>
+<section class="panel"><h2>查看完整输出</h2><div class="toolbar"><a href="source.html">Matplotlib整文件及检索报告</a><a href="contract.html">跨模块来源链报告</a><a href="packet.json" download>下载本页原始证据</a></div><p class="meta">正常项和暂不能确定项都可以在筛选器中查看。跨模块追踪依赖指定的源码映射，不证明任意运行环境的行为；装饰器、模板和动态设置仍有支持边界。</p></section>
+<footer id="footer"></footer></main>
+<script id="packet" type="application/json">__PACKET_JSON__</script>
+<script>
+'use strict';
+const packet=JSON.parse(document.getElementById('packet').textContent);
+const byId=id=>document.getElementById(id);
+const text=(tag,value,className)=>{const element=document.createElement(tag);element.textContent=value;if(className)element.className=className;return element;};
+const statusNames={candidate:'声明值不一致候选',consistent:'声明值一致',uncertain:'暂不能确定',unpaired:'未找到唯一对应项'};
+const reasonNames={
+ literal_values_differ:'代码声明与文档明确写出的默认值不同。',literal_values_agree:'这里比较的两个声明值相同。',
+ document_and_traced_default_differ:'沿参数传递关系找到的声明值与文档不同。',document_and_traced_default_agree:'文档默认值与追踪到的声明值相同。',
+ no_unique_explicit_header_default:'没有找到唯一且受支持的默认值表达。',no_unique_explicit_default_claim:'没有找到唯一且受支持的默认值表达。',
+ parameter_not_explicit_in_signature:'函数声明未直接列出这个参数，需要进一步核对转发关系。',required_parameter_has_no_default:'这是必填参数，没有可供比较的默认值。',
+ default_not_in_supported_header:'默认值写在正文中，当前解析器还不支持该表达。',non_literal_or_qualified_default:'默认值包含配置、限定条件或表达式，不能直接比较。',
+ sentinel_requires_behavior_review:'None可能触发内部默认设置，需要进一步核对。',sentinel_default_requires_behavior_review:'None可能触发内部默认设置，需要进一步核对。',
+ unsupported_unit_or_claim_continuation:'单位或后续限定条件暂不支持。'};
+let decisions=Object.fromEntries(packet.items.map(item=>[item.item_id,{decision:'pending',reason:''}]));
+let page=0;const pageSize=10;
+const storageKey='repoproof-assisted-review-v1:'+packet.packet_sha256;
+const validChoices=['pending','mismatch','consistent','uncertain'];
+function notify(message,error=false){byId('export-message').textContent=message;byId('export-message').className=error?'error':'success';}
+function validateRecord(record){
+ if(record.schema_version!==1||record.record_kind!=='assisted_development_review_self_report'||record.packet_sha256!==packet.packet_sha256||record.model_predictions_shown!==true||record.independent_gold!==false||record.participant!=='current_operator')throw new Error('记录类型或证据版本不匹配。请使用导出时对应的工作台版本。');
+ if(!Array.isArray(record.judgments)||record.judgments.length!==packet.items.length)throw new Error('记录不完整：未复核的条目也必须保留。');
+ const ids=new Set(packet.items.map(item=>item.item_id)),seen=new Set(),next=Object.create(null);
+ for(const row of record.judgments){
+  if(!row||!ids.has(row.item_id)||seen.has(row.item_id)||!validChoices.includes(row.decision)||typeof row.reason!=='string'||row.reason.length>3000)throw new Error('存在重复、未知或无效的复核条目。');
+  if(row.decision!=='pending'&&!row.reason.trim())throw new Error('已作判断的条目缺少理由。');
+  seen.add(row.item_id);next[row.item_id]={decision:row.decision,reason:row.reason};
+ }
+ return next;
+}
+function exportRecord(){return {schema_version:1,record_kind:'assisted_development_review_self_report',packet_sha256:packet.packet_sha256,participant:'current_operator',model_predictions_shown:true,independent_gold:false,exported_at:new Date().toISOString(),judgments:packet.items.map(item=>({item_id:item.item_id,...decisions[item.item_id]}))};}
+function updateProgress(){byId('review-count').textContent=Object.values(decisions).filter(row=>row.decision!=='pending'&&row.reason.trim()).length;}
+function saveDraft(){
+ updateProgress();
+ try{localStorage.setItem(storageKey,JSON.stringify({packet_sha256:packet.packet_sha256,decisions}));byId('storage-message').textContent='草稿已保存在当前浏览器；正式留存请导出JSON。';}
+ catch(error){byId('storage-message').textContent='浏览器没有保存草稿。请保持页面打开，并用导出按钮保存JSON。';}
+}
+try{
+ const saved=JSON.parse(localStorage.getItem(storageKey)||'null');
+ if(saved&&saved.packet_sha256===packet.packet_sha256){
+  // Drafts may have unfinished reasons. Validate their shape before restoring.
+  const keys=packet.items.map(item=>item.item_id);
+  if(saved.decisions&&Object.keys(saved.decisions).length===keys.length&&keys.every(id=>saved.decisions[id]&&validChoices.includes(saved.decisions[id].decision)&&typeof saved.decisions[id].reason==='string'&&saved.decisions[id].reason.length<=3000)){
+   decisions=saved.decisions;byId('storage-message').textContent='已恢复当前浏览器中相同证据版本的草稿。';
+  }
+ }
+}catch(error){byId('storage-message').textContent='未恢复浏览器草稿，可以从已导出的JSON恢复。';}
+function renderOverview(){
+ byId('run-note').textContent=packet.retrieval.model_called?'本地MiniLM模型已实际运行 · CPU推理 · 目标仓库代码未执行':'本次明确选择纯静态模式，未调用AI模型 · 目标仓库代码未执行';
+ for(const [value,label,accent] of [[packet.items.length,'修复前参数记录',false],[packet.counts_before.candidate,'需要复核的候选',true],[packet.counts_before.consistent,'声明值一致',false],[packet.counts_before.uncertain,'暂不能确定',false]]){
+  const card=text('div','','stat'+(accent?' accent':''));card.append(text('strong',value),text('span',label));byId('stats').append(card);
+ }
+ for(const item of packet.cases){
+  const card=text('div','','panel');card.append(text('h3',item.title));
+  const line=text('div','','project-row');line.append(text('span','修复前 → 修复后候选'),text('strong',`${item.counts_before.candidate||0} → ${item.counts_after.candidate||0}`));card.append(line);
+  card.append(text('p',`${item.rows_before}条修复前记录 · 1个历史开发事件`,'meta'));
+  const link=text('a','查看上游修复');link.href=item.upstream_url;link.target='_blank';link.rel='noopener noreferrer';card.append(link);byId('projects').append(card);
+  const option=text('option',item.title);option.value=item.case_id;byId('case-filter').append(option);
+ }
+ byId('footer').textContent='开发证据版本 '+packet.packet_sha256.slice(0,16)+' · 原始报告和逐项结果随运行归档。人工记录与机器输出分开保存；本页面没有宣称独立评测或自动修复。';
+}
+function addRawEvidence(container,row){
+ const grid=text('div','','evidence'),doc=text('div',''),code=text('div','');
+ const d=row.document;doc.append(text('label',`原说明 · ${d.path} · L${d.start_line}–${d.end_line}`,'wrap'),text('pre',d.text));
+ const declaration=row.declaration;
+ if(declaration){code.append(text('label',`代码声明 · L${declaration.line||'未定位'}`),text('pre',declaration.source_line||declaration.expression||'未提取到可直接比较的默认值'));}
+ else if(row.contract&&row.contract.trace){
+  const end=[...row.contract.trace].reverse().find(step=>step.kind==='declared_default');
+  code.append(text('label',end?`代码来源 · ${end.path} · L${end.line}`:'代码来源尚未确定','wrap'),text('pre',end?(end.source_line||end.text):'没有找到受支持的声明来源'));
+  const details=text('details','');details.append(text('summary','展开参数转发的完整来源链'));const steps=text('ol','');
+  for(const step of row.contract.trace){const li=text('li','');li.append(text('span',`${step.path} · L${step.line}`,'meta wrap'),text('pre',step.source_line||step.text));steps.append(li);}details.append(steps);code.append(details);
+ }else{code.append(text('label','代码来源'),text('p','当前没有足够证据给出比较结论。','meta'));}
+ if(row.unit_evidence){const detail=text('details','');detail.append(text('summary','查看单位依据'),text('pre',row.unit_evidence.provider_document.text));code.append(detail);}
+ grid.append(doc,code);container.append(grid);
+}
+function renderCards(){
+ const filter=byId('status-filter').value,project=byId('case-filter').value,query=byId('search').value.trim().toLowerCase();
+ const rows=packet.items.filter(item=>(filter==='all'||filter===item.machine_status)&&(project==='all'||item.case_id===project)&&(!query||`${item.symbol} ${item.parameter} ${item.project}`.toLowerCase().includes(query)));
+ const pages=Math.max(1,Math.ceil(rows.length/pageSize));page=Math.min(page,pages-1);
+ byId('filter-count').textContent=`当前筛选 ${rows.length} 条 / 全部 ${packet.items.length} 条；筛选不会改变原始结果。`;
+ byId('cards').replaceChildren();
+ if(!rows.length)byId('cards').append(text('p','没有符合当前筛选条件的记录。'));
+ for(const item of rows.slice(page*pageSize,(page+1)*pageSize)){
+  const article=text('article','');article.dataset.itemId=item.item_id;
+  const top=text('div','','card-top'),title=text('div','');title.append(text('span',statusNames[item.machine_status],'tag '+item.machine_status),text('h3',`${item.symbol} / ${item.parameter}`));top.append(title,text('span',item.project,'meta'));article.append(top);
+  article.append(text('p',reasonNames[item.before.reason]||'当前证据范围有限，请结合原文和完整报告核对。','meta'));
+  addRawEvidence(article,item.before);
+  const fixed=text('details','');fixed.append(text('summary','修复后对照：'+statusNames[item.after_status]));
+  if(item.after)addRawEvidence(fixed,item.after);else fixed.append(text('p','没有找到唯一对应项，不能推断已修复。'));
+  article.append(fixed);
+  const form=text('div','','human'),choiceLabel=text('label','你的判断（针对修复前）'),choice=text('select','');choice.setAttribute('aria-label',`${item.symbol} ${item.parameter} 人工判断`);
+  for(const [value,label] of [['pending','未复核'],['mismatch','有证据支持不一致'],['consistent','该项默认值一致'],['uncertain','我还不能确定']]){const option=text('option',label);option.value=value;choice.append(option);}choice.value=decisions[item.item_id].decision;choiceLabel.append(choice);
+  const reasonLabel=text('label','依据或仍缺少什么证据'),reason=text('textarea','');reason.maxLength=3000;reason.value=decisions[item.item_id].reason;reason.placeholder='写下你实际看过的代码、文档依据；不确定时说明哪一步还不清楚。';reason.setAttribute('aria-label',`${item.symbol} ${item.parameter} 判断理由`);reasonLabel.append(reason);
+  choice.addEventListener('change',()=>{decisions[item.item_id].decision=choice.value;saveDraft();});reason.addEventListener('input',()=>{decisions[item.item_id].reason=reason.value;saveDraft();});
+  form.append(choiceLabel,reasonLabel);article.append(form);byId('cards').append(article);
+ }
+ byId('prev').disabled=page===0;byId('next').disabled=page>=pages-1;byId('page-position').textContent=`${page+1} / ${pages}`;
+}
+function renderRetrieval(){
+ const target=byId('retrieval-content'),probe=packet.retrieval;
+ if(!probe.model_called){target.append(text('p','本次未运行AI定位，不能显示AI效果数据。'));return;}
+ target.append(text('p',`${probe.corpus_blocks}段同池说明，${probe.total_queries}个代码查询；其中${probe.unique_reference_queries}个有唯一结构对应，另${probe.queries_without_unique_reference}个没有唯一参考。`,'meta'));
+ const wrapper=text('div','','table-wrap'),table=text('table',''),head=text('thead',''),tr=text('tr','');for(const title of ['方法','前1条找到','前3条找到','前5条找到'])tr.append(text('th',title));head.append(tr);table.append(head);
+ const body=text('tbody',''),names={lexical:'共同词语检索',bm25:'BM25加权词语检索',semantic:'AI语义检索',rrf:'共同词语 + AI融合',bm25_rrf:'BM25 + AI融合'};
+ for(const method of ['lexical','bm25','semantic','rrf','bm25_rrf']){const s=probe.summaries[method];if(!s)continue;const row=text('tr','');row.append(text('td',names[method]));for(const k of ['1','3','5'])row.append(text('td',`${s.hits[k]} / ${s.reference_queries}`));body.append(row);}table.append(body);wrapper.append(table);target.append(wrapper);
+ const change=probe.semantic_vs_lexical_top3;
+ target.append(text('p',`同一开发文件中，AI在前3条多找回${change.gains}项，也漏掉了共同词语检索能找回的${change.losses}项。`));
+ if(probe.semantic_vs_bm25_top3){const compared=probe.semantic_vs_bm25_top3;target.append(text('p',`相对BM25，AI在前3条多找回${compared.gains}项，也漏掉了BM25能找回的${compared.losses}项。BM25按词语的区分度、出现次数和文档长度加权，不是神经模型。`));}
+ target.append(text('p',`上述数字是定位诊断，不是判错准确率。明确的函数和参数名可用结构定位直接对应这${probe.structural_lookup_hits}项，结构对应本身就是这里的参考定义。这一实验尚不能证明AI整体优于结构方法或能发现更多缺陷。`,'metrics-note'));
+}
+byId('download').addEventListener('click',()=>{
+ try{const record=exportRecord();validateRecord(record);if(!record.judgments.some(row=>row.decision!=='pending'))throw new Error('请先实际核对至少一条；选择“我还不能确定”并写理由也可以。');
+  const blob=new Blob([JSON.stringify(record,null,2)],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`文证人工复核_${packet.packet_sha256.slice(0,12)}_${Date.now()}.json`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);notify('已发起下载。请检查浏览器下载目录；该文件是你的辅助复核记录。');
+ }catch(error){notify(error.message,true);}
+});
+byId('import-record').addEventListener('change',async event=>{
+ const file=event.target.files[0];if(!file)return;
+ try{if(file.size>2000000)throw new Error('文件过大，请选择本工作台导出的JSON。');const record=JSON.parse(await file.text());const imported=validateRecord(record);decisions=imported;saveDraft();renderCards();notify('已从JSON恢复记录，请确认内容是你本人的实际判断。');}catch(error){notify('恢复失败：'+error.message,true);}finally{event.target.value='';}
+});
+for(const id of ['status-filter','case-filter'])byId(id).addEventListener('change',()=>{page=0;renderCards();});byId('search').addEventListener('input',()=>{page=0;renderCards();});
+byId('prev').addEventListener('click',()=>{page--;renderCards();byId('review').scrollIntoView();});byId('next').addEventListener('click',()=>{page++;renderCards();byId('review').scrollIntoView();});
+renderOverview();renderCards();renderRetrieval();updateProgress();
+</script></body></html>
